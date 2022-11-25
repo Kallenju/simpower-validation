@@ -189,12 +189,12 @@ const validation = new SimpowerValidation(
 <table>
   <thead>
     <tr>
-      <th colspan="3" align="right">validateFieldOnEvent</th>
+      <th colspan="3" align="center">validateFieldOnEvent</th>
     </tr>
     <tr>
-      <th>Field</th>
-      <th>Description</th>
-      <th>Type</th>
+      <th align="center">Field</th>
+      <th align="center">Description</th>
+      <th align="center">Type</th>
     </tr>
   </thead>
   <tbody>
@@ -236,14 +236,14 @@ const validation = new SimpowerValidation(
     <tr>
       <td>ruleErrorMessages.classes</td>
       <td>ССS classes to be added to containers with error messages.</td>
-      <td>Array witd css classes</td>
+      <td>Array with css classes</td>
     </tr>
     <tr>
       <td>successedValidationMessage.on</td>
       <td>Enable success messages</td>
       <td>boolean</td>
     </tr>
-        <tr>
+    <tr>
       <td>successedValidationMessage.on</td>
       <td>Text of success messages</td>
       <td>string</td>
@@ -289,12 +289,12 @@ const validation = new SimpowerValidation(
 <table>
   <thead>
     <tr>
-      <th colspan="3">validateOnSubmit</th>
+      <th colspan="3" align="center">validateOnSubmit</th>
     </tr>
     <tr>
-      <th>Field</th>
-      <th>Description</th>
-      <th>Type</th>
+      <th align="center">Field</th>
+      <th align="center">Description</th>
+      <th align="center">Type</th>
     </tr>
   </thead>
   <tbody>
