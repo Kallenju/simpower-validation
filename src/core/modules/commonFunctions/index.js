@@ -6,3 +6,4 @@ export { insert } from './insert.js';
 export { isElementInDOM } from './isElementInDOM.js';
 export { isDOMElement } from './isDOMElement.js';
 export { createId } from './createId.js';
+export { isEmpty } from './isEmpty.js';

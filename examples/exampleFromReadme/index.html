@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src=""></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        const validation = new window.SimpowerValidation('#form', {
+          validateFieldOnEvent: {
+            event: 'blur',
+
+            afterFirstSubmition: true,
+
+            lockInputOnValidation: false,
+
+            fieldValueHandler(fieldValue) {
+              return fieldValue;
+            },
+
+            ruleErrorMessages: {
+              on: true,
+              position: {
+                append: '#messagesContainerForAllInputs',
+              },
+              removeContainerFromDOMAfterSuccess: true,
+              classes: ['message-css-class', 'error-message-css-class'],
+            },
+
+            successfulValidationMessage: {
+              on: true,
+              successMessage: 'Validation succeeded',
+              position: {
+                append: '#messagesContainerForAllInputs',
+              },
+              removeContainerFromDOMAfterFail: true,
+              classes: ['message', 'message_success'],
+            },
+
+            invalidViewOfField: {
+              on: true,
+              classes: ['input_view_invalid'],
+            },
+
+            validViewOfField: {
+              on: true,
+              classes: ['input_view_valid'],
+            },
+          },
+
+          validateOnSubmit: {
+            lockFormOnValidation: false,
+            revalidateAllFieldsBeforeSubmition: false,
+          },
+        });
+
+        validation
+          .addField('name', [
+            {
+              validator(inputValue) {
+                return inputValue.trim();
+              },
+              errorMessage: 'Name is required',
+            },
+            {
+              validator(inputValue) {
+                const nameRegEx = /^[a-zA-Z]{1,40}$/;
+                return inputValue.match(nameRegEx);
+              },
+              errorMessage: 'Name is invalid',
+            },
+          ])
+          .addField(
+            'email',
+            [
+              {
+                validator(inputValue) {
+                  if (!inputValue.trim()) {
+                    return true;
+                  }
+
+                  const emailRegEx =
+                    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+                  return inputValue.match(emailRegEx);
+                },
+                errorMessage: 'Email is invalid',
+              },
+            ],
+            {
+              event: 'input',
+
+              ruleErrorMessages: {
+                position: {
+                  append: '#messageContainerForEmailInput',
+                },
+              },
+
+              successfulValidationMessage: {
+                position: {
+                  append: '#messageContainerForEmailInput',
+                },
+              },
+            }
+          );
+      });
+    </script>
+  </head>
+  <body>
+    <form id="form">
+      <label for="name">Enter your name</label>
+      <input id="name" name="name" type="text" placeholder="Enter your name" />
+      <label for="email">Enter your email</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        placeholder="Enter your email"
+      />
+      <button type="submit">Submit</button>
+    </form>
+
+    <div id="messagesContainerForAllInputs"></div>
+
+    <div id="messageContainerForEmailInput"></div>
+  </body>
+</html>

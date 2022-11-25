@@ -77,7 +77,7 @@ validation
   .addField('name', [
     {
       validator(inputValue) {
-        return !inputValue.trim();
+        return inputValue.trim();
       },
       errorMessage: 'Name is required',
     },
@@ -85,7 +85,7 @@ validation
       validator(inputValue) {
         const nameRegEx = /^[a-zA-Z]{1,40}$/;
         return inputValue.match(nameRegEx);
-      }
+      },
       errorMessage: 'Name is invalid',
     },
   ])
@@ -99,7 +99,7 @@ validation
         const emailRegEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
         return inputValue.match(emailRegEx);
-      }
+      },
       errorMessage: 'Email is invalid'
     },
   ]);
@@ -128,9 +128,9 @@ Let's change the HTML layout mentioned above:
   <button type="submit">Submit</button>
 </form>
 
-<div id="#messagesContainerForAllInputs"></div>
+<div id="messagesContainerForAllInputs"></div>
 
-<div id="#messageContainerForEmailInput"></div>
+<div id="messageContainerForEmailInput"></div>
 ```
 
 ```js
@@ -142,11 +142,11 @@ const validation = new SimpowerValidation(
 
       afterFirstSubmition: true,
 
-      lockInputOnValidation: true,
+      lockInputOnValidation: false,
 
       fieldValueHandler(fieldValue) {
         return fieldValue;
-      }
+      },
 
       ruleErrorMessages: {
         on: true,
@@ -179,7 +179,7 @@ const validation = new SimpowerValidation(
     },
 
     validateOnSubmit: {
-      lockFormOnValidation: true,
+      lockFormOnValidation: false,
       revalidateAllFieldsBeforeSubmition: false,
     },
   },
@@ -363,11 +363,23 @@ The argument is structurally identical to `validateFieldOnEvent` object in the g
 
 The third argument overrides the corresponding properties in the global configuration for the specific field.
 
-So, for example, if we set the following setting for the email field in the example above, the name field will be validated after the blur event, while the email field will be validated after the input event.
+So, for example, if we set the following setting for the email field in the example above, the name field will be validated after the blur event, while the email field will be validated after the input event. Also it changes container for error or successful messages.
 
 ```js
 {
   event: 'input',
+
+  ruleErrorMessages: {
+    position: {
+      append: '#messageContainerForEmailInput',
+    },
+  },
+
+  successfulValidationMessage: {
+    position: {
+      append: '#messageContainerForEmailInput',
+    },
+  },
 }
 ```
 

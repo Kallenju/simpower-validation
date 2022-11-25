@@ -8,5 +8,4 @@
 .vscode
 **/browsersync
 **/dist
-**/*.html
 **/*.md

@@ -8,6 +8,7 @@ import {
   insert,
   isDOMElement,
   createId,
+  isEmpty,
 } from './modules/commonFunctions/index.js';
 import { ValidationError } from './modules/errors/validationError/index.js';
 
@@ -190,10 +191,10 @@ class SimpowerValidation {
       }
 
       if (event) {
-        if (!hasProperty(rulesByEvent, rule.event)) {
-          rulesByEvent[rule.event] = [rule];
+        if (!hasProperty(rulesByEvent, event)) {
+          rulesByEvent[event] = [rule];
         } else {
-          rulesByEvent[rule.event].push(rule);
+          rulesByEvent[event].push(rule);
         }
       } else {
         rulesByEvent.submit.push(rule);
@@ -238,17 +239,32 @@ class SimpowerValidation {
   getFieldValue(field) {
     const simpowerValidation = this;
 
+    let fieldValue = null;
+
     const fieldObject = simpowerValidation.getFieldObject(field);
     const { elem } = fieldObject;
 
     switch (elem.type) {
-      case 'checkbox':
-        return elem.checked;
-      case 'file':
-        return elem.files;
-      default:
-        return elem.value;
+      case 'checkbox': {
+        fieldValue = elem.checked;
+
+        break;
+      }
+      case 'file': {
+        fieldValue = elem.files;
+
+        break;
+      }
+      default: {
+        fieldValue = elem.value;
+      }
     }
+
+    if (hasProperty(field.config, 'fieldValueHandler')) {
+      fieldValue = field.config.fieldValueHandler(fieldValue);
+    }
+
+    return fieldValue;
   }
 
   getFieldObject(field) {
@@ -304,7 +320,7 @@ class SimpowerValidation {
     const simpowerValidation = this;
 
     simpowerValidation.clearFields(singleField);
-    simpowerValidation.deleteMessages(singleField);
+    simpowerValidation.deleteMessages(singleField, true);
     simpowerValidation.restoreFieldsProperties(singleField);
   }
 
@@ -386,7 +402,7 @@ class SimpowerValidation {
 
             field.errorMessage = error.message.toString();
           })
-          .finally(async () => {
+          .finally(() => {
             simpowerValidation.setViewOnFields(field);
             simpowerValidation.deleteMessages(field);
             simpowerValidation.createMessages(field);
@@ -572,11 +588,7 @@ class SimpowerValidation {
     let result;
 
     field = simpowerValidation.getFieldObject(field);
-    let fieldValue = simpowerValidation.getFieldValue(field);
-
-    if (hasProperty(field.config, 'fieldValueHandler')) {
-      fieldValue = field.config.fieldValueHandler(fieldValue);
-    }
+    const fieldValue = simpowerValidation.getFieldValue(field);
 
     if (hasProperty(rule, 'validator')) {
       result = await rule.validator(fieldValue);
@@ -666,16 +678,16 @@ class SimpowerValidation {
         !simpowerValidation.isFieldValid(field) &&
         field.config.ruleErrorMessages.on
       ) {
-        const containerForError =
+        const errorContainer =
           simpowerValidation.getContainerForMessageText(field);
-        containerForError.textContent = field.errorMessage;
+        errorContainer.textContent = field.errorMessage;
       } else if (
         simpowerValidation.isFieldValid(field) &&
         field.config.successfulValidationMessage.on
       ) {
-        const containerForSuccess =
+        const successContainer =
           simpowerValidation.getContainerForMessageText(field);
-        containerForSuccess.textContent = field.successMessage;
+        successContainer.textContent = field.successMessage;
       }
     });
   }
@@ -746,6 +758,8 @@ class SimpowerValidation {
   getContainerForMessageText(field) {
     const simpowerValidation = this;
 
+    let messageContainer = null;
+
     field = simpowerValidation.getFieldObject(field);
 
     if (
@@ -761,10 +775,8 @@ class SimpowerValidation {
       } else {
         field.errorContainer = document.createElement('div');
 
-        const { errorContainer } = field;
-
         if (config.classes) {
-          errorContainer.classList.add(...config.classes);
+          field.errorContainer.classList.add(...config.classes);
         }
       }
     } else if (
@@ -780,15 +792,19 @@ class SimpowerValidation {
       } else {
         field.successContainer = document.createElement('div');
 
-        const { successContainer } = field;
-
         if (config.classes) {
-          successContainer.classList.add(...config.classes);
+          field.successContainer.classList.add(...config.classes);
         }
       }
     }
 
-    return field.errorContainer;
+    if (!simpowerValidation.isFieldValid(field)) {
+      messageContainer = field.errorContainer;
+    } else {
+      messageContainer = field.successContainer;
+    }
+
+    return messageContainer;
   }
 
   renderMessages(singleField = null) {
@@ -802,6 +818,13 @@ class SimpowerValidation {
       let messageContainer = null;
       let messageContainerPossition = null;
 
+      if (
+        simpowerValidation.isFieldValid(field) &&
+        isEmpty(simpowerValidation.getFieldValue(field))
+      ) {
+        return;
+      }
+
       if (!simpowerValidation.isFieldValid(field)) {
         const config = field.config.ruleErrorMessages;
 
@@ -810,7 +833,6 @@ class SimpowerValidation {
             messageContainer = field.errorContainer;
             messageContainerPossition = config.position;
           }
-          field.errorMessageIsShown = true;
         }
       } else {
         const config = field.config.successfulValidationMessage;
@@ -820,12 +842,17 @@ class SimpowerValidation {
             messageContainer = field.successContainer;
             messageContainerPossition = config.position;
           }
-          field.successMessageIsShown = true;
         }
       }
 
       try {
         insert(messageContainer, messageContainerPossition);
+
+        if (!simpowerValidation.isFieldValid(field)) {
+          field.errorMessageIsShown = true;
+        } else {
+          field.successMessageIsShown = true;
+        }
       } catch (err) {
         if (
           err.name === 'TypeError' &&

@@ -4,7 +4,7 @@ const defaults = {
 
     afterFirstSubmition: true,
 
-    lockInputOnValidation: true,
+    lockInputOnValidation: false,
 
     fieldValueHandler: null,
 
@@ -37,7 +37,7 @@ const defaults = {
   },
 
   validateOnSubmit: {
-    lockFormOnValidation: true,
+    lockFormOnValidation: false,
     revalidateAllFieldsBeforeSubmition: false,
   },
 };
