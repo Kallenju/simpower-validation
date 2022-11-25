@@ -18,6 +18,11 @@ const config = {
 
   output: {
     filename: 'simpower-validation.production.min.js',
+    library: {
+      name: 'SimpowerValidation',
+      type: 'window',
+      export: 'default',
+    },
     path: path.resolve(__dirname, './dist'),
     clean: true,
   },

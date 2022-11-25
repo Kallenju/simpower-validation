@@ -31,14 +31,6 @@ import SimpowerValidation from 'simpower-validation';
 const validate = new SimpowerValidation('#form');
 ```
 
-or using a CommonJS build tool
-
-```js
-const SimpowerValidation = reqiure('simpower-validation');
-
-const validate = new SimpowerValidation('#form');
-```
-
 If you don't use module bundlers, you can import SimpowerValidation via a browser:
 
 ```js

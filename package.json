@@ -1,13 +1,12 @@
 {
   "name": "simpower-validation",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Modern, simple but powerful form validation library written in pure JavaScript, with no dependencies.",
-  "main": "./simpower-validation.production.min.js",
+  "main": "./simpower-validation.esm.js",
   "module": "./simpower-validation.esm.js",
   "exports": {
     ".": {
-      "import": "./simpower-validation.esm.js",
-      "require": "./simpower-validation.production.min.js"
+      "import": "./simpower-validation.esm.js"
     }
   },
   "browserslist": {
@@ -43,12 +42,6 @@
     "url": "https://github.com/Kallenju/simpower-validation/issues"
   },
   "homepage": "https://github.com/Kallenju/simpower-validation#readme",
-  "funding": [
-    {
-      "type": "patreon",
-      "url": "https://www.patreon.com/"
-    }
-  ],
   "devDependencies": {
     "@babel/core": "^7.20.2",
     "@babel/eslint-parser": "^7.19.1",
