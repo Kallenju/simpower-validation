@@ -8,12 +8,11 @@ The library is very simple. There are no complicated predefined rules here becau
 
 ## Features
 
-*   small size and zero dependencies
-*   custom rules
-*   custom messages
-*   custom styles and css classes for valid/invalid fields and success/error messages
-*   custom places for the messages
-
+- small size and zero dependencies
+- custom rules
+- custom messages
+- custom styles and css classes for valid/invalid fields and success/error messages
+- custom places for the messages
 
 ## Installation
 
@@ -42,7 +41,7 @@ const validate = new SimpowerValidation('#form');
 Or you can just include SimpowerValidation script on your page from CDN and call it as `window.SimpowerValidation`:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/simpower-validation@latest/simpower-validation.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/simpower-validation/simpower-validation.production.min.js"></script>
 
 <script>
   window.addEventListener('DOMContentLoaded', () => {
@@ -58,19 +57,9 @@ Let's say we have a basic HTML layout:
 ```html
 <form id="form">
   <label for="name">Enter your name</label>
-  <input
-    id="name"
-    name="name"
-    type="text"
-    placeholder="Enter your name"
-  />
+  <input id="name" name="name" type="text" placeholder="Enter your name" />
   <label for="email">Enter your email</label>
-  <input
-    id="email"
-    name="email"
-    type="email"
-    placeholder="Enter your email"
-  />
+  <input id="email" name="email" type="email" placeholder="Enter your email" />
   <button type="submit">Submit</button>
 </form>
 ```
@@ -120,7 +109,6 @@ That's all! The form is now validated!
 
 Let's consider API.
 
-
 ## API
 
 ### Instance setting
@@ -134,27 +122,15 @@ Let's change the HTML layout mentioned above:
 ```html
 <form id="form">
   <label for="name">Enter your name</label>
-  <input
-    id="name"
-    name="name"
-    type="text"
-    placeholder="Enter your name"
-  />
+  <input id="name" name="name" type="text" placeholder="Enter your name" />
   <label for="email">Enter your email</label>
-  <input
-    id="email"
-    name="email"
-    type="email"
-    placeholder="Enter your email"
-  />
+  <input id="email" name="email" type="email" placeholder="Enter your email" />
   <button type="submit">Submit</button>
 </form>
 
-<div id="#messagesContainerForAllInputs">
-</div>
+<div id="#messagesContainerForAllInputs"></div>
 
-<div id="#messageContainerForEmailInput">
-</div>
+<div id="#messageContainerForEmailInput"></div>
 ```
 
 ```js
@@ -209,115 +185,128 @@ const validation = new SimpowerValidation(
   },
 )
 ```
+
 <table>
   <thead>
     <tr>
-      <th style="text-align: center">Field</th>
-      <th style="text-align: center">Description</th>
-      <th style="text-align: center">Type</th>
+      <th colspan="3" align="right">validateFieldOnEvent</th>
+    </tr>
+    <tr>
+      <th>Field</th>
+      <th>Description</th>
+      <th>Type</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td colspan="3" style="text-align: center">validateFieldOnEvent</td>
+      <td>event</td>
+      <td>JavaScript Event. tdis event is added to form elements tdat have been added for validation. When tde event fires, validation starts. If tde event name is invalid, unvalidated elements will be validated when attempting to submit.</td>
+      <td>string</td>
     </tr>
     <tr>
-      <td style="max-width: 220px; text-align: center;">event</td>
-      <td style="text-align: center">JavaScript Event. tdis event is added to form elements tdat have been added for validation. When tde event fires, validation starts. If tde event name is invalid, unvalidated elements will be validated when attempting to submit.</td>
-      <td style="text-align: center">string</td>
+      <td>afterFirstSubmition</td>
+      <td>If true, validation after the event specified in the 'event' parameter will work only after the first submission attempt.</td>
+      <td>boolean</td>
     </tr>
     <tr>
-      <td style="max-width: 220px; text-align: center;">afterFirstSubmition</td>
-      <td style="text-align: center">If true, validation after the event specified in the 'event' parameter will work only after the first submission attempt.</td>
-      <td style="text-align: center">boolean</td>
-    </tr>
-    <tr>
-      <td style="max-width: 220px; text-align: center;">lockInputOnValidation</td>
-      <td style="text-align: center">This option is useful if an asynchronous validator is specified. It sets the disabled attribute on the fields for the duration of the validation.</td>
-      <td style="text-align: center">boolean</td>
+      <td>lockInputOnValidation</td>
+      <td>This option is useful if an asynchronous validator is specified. It sets the disabled attribute on the fields for the duration of the validation.</td>
+      <td>boolean</td>
     </tr>
         <tr>
-      <td style="max-width: 220px; text-align: center;">fieldValueHandler</td>
-      <td style="text-align: center">If exists, this function change value which take validator functin. It is very useful feature if you, for example, use masks for inputs (you can use `fieldValueHandler`for unmasking of input value before validation.</td>
-      <td style="text-align: center">function</td>
+      <td>fieldValueHandler</td>
+      <td>If exists, this function change value which take validator functin. It is very useful feature if you, for example, use masks for inputs (you can use `fieldValueHandler`for unmasking of input value before validation.</td>
+      <td>function</td>
     </tr>
     <tr>
-      <td style="max-width: 220px; text-align: center;">ruleErrorMessages.on</td>
-      <td style="text-align: center">Enable error message</td>
-      <td style="text-align: center">boolean</td>
+      <td>ruleErrorMessages.on</td>
+      <td>Enable error message</td>
+      <td>boolean</td>
     </tr>
     <tr>
-      <td style="max-width: 220px; text-align: center;">ruleErrorMessages.position</td>
-      <td style="text-align: center">Define where error message will be inserted. It has four optional properties: 'append', 'prepand', 'after' and 'before'. Possible value type is string | Element.</td>
-      <td style="text-align: center">object</td>
+      <td>ruleErrorMessages.position</td>
+      <td>Define where error message will be inserted. It has four optional properties: 'append', 'prepand', 'after' and 'before'. Possible value type is string | Element.</td>
+      <td>object</td>
     </tr>
     <tr>
-      <td style="max-width: 220px; text-align: center;">ruleErrorMessages.removeContainerFromDOMAfterSuccess</td>
-      <td style="text-align: center">If true, a error message will be deleted after a successful validation.</td>
-      <td style="text-align: center">boolean</td>
+      <td>ruleErrorMessages.   <br>&nbsp&nbspremoveContainerFromDOMAfterSuccess</td>
+      <td>If true, a error message will be deleted after a successful validation.</td>
+      <td>boolean</td>
     </tr>
     <tr>
-      <td style="max-width: 220px; text-align: center;">ruleErrorMessages.classes</td>
-      <td style="text-align: center">ССS classes to be added to containers with error messages.</td>
-      <td style="text-align: center">Array witd css classes</td>
+      <td>ruleErrorMessages.classes</td>
+      <td>ССS classes to be added to containers with error messages.</td>
+      <td>Array witd css classes</td>
     </tr>
     <tr>
-      <td style="max-width: 220px; text-align: center;">successedValidationMessage.on</td>
-      <td style="text-align: center">Enable success messages</td>
-      <td style="text-align: center">boolean</td>
+      <td>successedValidationMessage.on</td>
+      <td>Enable success messages</td>
+      <td>boolean</td>
     </tr>
         <tr>
-      <td style="max-width: 220px; text-align: center;">successedValidationMessage.on</td>
-      <td style="text-align: center">Text of success messages</td>
-      <td style="text-align: center">string</td>
+      <td>successedValidationMessage.on</td>
+      <td>Text of success messages</td>
+      <td>string</td>
     </tr>
     <tr>
-      <td style="max-width: 220px; text-align: center;">successedValidationMessage.position</td>
-      <td style="text-align: center">Define where success message will be inserted. It has four optional properties: 'append', 'prepand', 'after' and 'before'. Possible value type is string | Element.</td>
-      <td style="text-align: center">object</td>
+      <td>successedValidationMessage.position</td>
+      <td>Define where success message will be inserted. It has four optional properties: 'append', 'prepand', 'after' and 'before'. Possible value type is string | Element.</td>
+      <td>object</td>
     </tr>
     <tr>
-      <td style="max-width: 220px; text-align: center;">successedValidationMessage.removeContainerFromDOMAfterFail</td>
-      <td style="text-align: center">If true, a success message will be deleted after a failed validation.</td>
-      <td style="text-align: center">boolean</td>
+      <td>successedValidationMessage.<br>&nbsp&nbspremoveContainerFromDOMAfterFail</td>
+      <td>If true, a success message will be deleted after a failed validation.</td>
+      <td>boolean</td>
     </tr>
     <tr>
-      <td style="max-width: 220px; text-align: center;">successedValidationMessage.classes</td>
-      <td style="text-align: center">ССS classes to be added to containers with success messages.</td>
-      <td style="text-align: center">Array witd css classes</td>
+      <td>successedValidationMessage.classes</td>
+      <td>ССS classes to be added to containers with success messages.</td>
+      <td>Array witd css classes</td>
     </tr>
     <tr>
-      <td style="max-width: 220px; text-align: center;">invalidViewOfField.on</td>
-      <td style="text-align: center">Enable invalid views of fields</td>
-      <td style="text-align: center">boolean</td>
+      <td>invalidViewOfField.on</td>
+      <td>Enable invalid views of fields</td>
+      <td>boolean</td>
     </tr>
     <tr>
-      <td style="max-width: 220px; text-align: center;">invalidViewOfField.classes</td>
-      <td style="text-align: center">ССS classes to be added to invalid fields.</td>
-      <td style="text-align: center">Array witd css classes</td>
+      <td>invalidViewOfField.classes</td>
+      <td>ССS classes to be added to invalid fields.</td>
+      <td>Array witd css classes</td>
     </tr>
     <tr>
-      <td style="max-width: 220px; text-align: center;">validViewOfField.on</td>
-      <td style="text-align: center">Enable valid views of fields/td>
-      <td style="text-align: center">boolean</td>
+      <td>validViewOfField.on</td>
+      <td>Enable valid views of fields/td>
+      <td>boolean</td>
     </tr>
     <tr>
-      <td style="max-width: 220px; text-align: center;">validViewOfField.classes</td>
-      <td style="text-align: center">ССS classes to be added to valid fields.</td>
-      <td style="text-align: center">Array witd css classes</td>
+      <td>validViewOfField.classes</td>
+      <td>ССS classes to be added to valid fields.</td>
+      <td>Array witd css classes</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3">validateOnSubmit</th>
     </tr>
     <tr>
-      <td colspan="3" style="text-align: center">validateOnSubmit</td>
+      <th>Field</th>
+      <th>Description</th>
+      <th>Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>lockFormOnValidation</td>
+      <td>This option is useful if an asynchronous validator is specified. It sets the disabled attribute for all form elements.</td>
+      <td>boolean</td>
     </tr>
     <tr>
-      <td style="max-width: 220px; text-align: center;">lockFormOnValidation</td>
-      <td style="text-align: center">This option is useful if an asynchronous validator is specified. It sets the disabled attribute for all form elements.</td>
-      <td style="text-align: center">boolean</td>
-    </tr>
-    <tr>
-      <td style="max-width: 220px; text-align: center;">revalidateAllFieldsBeforeSubmition</td>
-      <td style="text-align: center">Enables forced validation of all fields before submission, even those that have already been validated.</td>
-      <td style="text-align: center">boolean</td>
+      <td>revalidateAllFieldsBeforeSubmition</td>
+      <td>Enables forced validation of all fields before submission, even those that have already been validated.</td>
+      <td>boolean</td>
     </tr>
   </tbody>
 </table>
@@ -369,6 +358,7 @@ There is the other variant of rule object:
 `validator` method can return an object with an error message, the text content of which depends on various conditions.
 
 #### config.
+
 The argument is structurally identical to `validateFieldOnEvent` object in the global config.
 
 The third argument overrides the corresponding properties in the global configuration for the specific field.
@@ -384,12 +374,13 @@ So, for example, if we set the following setting for the email field in the exam
 ### Callbacks
 
 There are four types of callbacks:
-1) when field or form validation starts: `validation.onStartValidation(callback: function, eventName: string): validation`
-2) when field or form validation ends: `validation.onEndValidation(callback: function, eventName: string): validation`
-3) when field or form validation succeeded: `validation.onSuccess(callback: function, eventName: string): validation`
-4) when field or form validation failed: `validation.onFail(callback: function, eventName: string): validation`
 
-Callbacks have two arguments. The first argument is built-in event object, the second one is the object  in case of validation of all fields during submition attemt or a field  in case of validation of a field.
+1. when field or form validation starts: `validation.onStartValidation(callback: function, eventName: string): validation`
+2. when field or form validation ends: `validation.onEndValidation(callback: function, eventName: string): validation`
+3. when field or form validation succeeded: `validation.onSuccess(callback: function, eventName: string): validation`
+4. when field or form validation failed: `validation.onFail(callback: function, eventName: string): validation`
+
+Callbacks have two arguments. The first argument is built-in event object, the second one is the object in case of validation of all fields during submition attemt or a field in case of validation of a field.
 
 The callbacks take two arguments. The first argument is the built-in event object, the second is the object `validation.form` when submitting, or the object (`validation.fields[someFieldId]`) in case of validation of a field.
 
