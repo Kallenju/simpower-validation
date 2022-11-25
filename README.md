@@ -145,7 +145,7 @@ const validation = new SimpowerValidation(
       lockInputOnValidation: true,
 
       fieldValueHandler(fieldValue) {
-        return `${fieldValue.toString()} - changed value`
+        return fieldValue;
       }
 
       ruleErrorMessages: {
