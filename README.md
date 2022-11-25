@@ -229,7 +229,7 @@ const validation = new SimpowerValidation(
       <td>object</td>
     </tr>
     <tr>
-      <td>ruleErrorMessages.   <br>&nbsp&nbspremoveContainerFromDOMAfterSuccess</td>
+      <td>ruleErrorMessages.   <br>&nbsp;&nbsp;removeContainerFromDOMAfterSuccess</td>
       <td>If true, a error message will be deleted after a successful validation.</td>
       <td>boolean</td>
     </tr>
@@ -254,7 +254,7 @@ const validation = new SimpowerValidation(
       <td>object</td>
     </tr>
     <tr>
-      <td>successedValidationMessage.<br>&nbsp&nbspremoveContainerFromDOMAfterFail</td>
+      <td>successedValidationMessage.<br>&nbsp;&nbsp;removeContainerFromDOMAfterFail</td>
       <td>If true, a success message will be deleted after a failed validation.</td>
       <td>boolean</td>
     </tr>
