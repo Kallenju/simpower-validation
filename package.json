@@ -1,6 +1,6 @@
 {
   "name": "simpower-validation",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Modern, simple but powerful form validation library written in pure JavaScript, with no dependencies.",
   "main": "./simpower-validation.esm.js",
   "module": "./simpower-validation.esm.js",
@@ -23,8 +23,8 @@
     "lint:fix": "eslint ./ --fix",
     "prettier": "prettier --check  --config ./.prettierrc.js ./**/*.js",
     "prettier:fix": "prettier --write --config ./.prettierrc.js ./**/*.js",
-    "build:dev": "set BROWSERSLIST_ENV=development&&set NODE_ENV=development&&webpack --config ./webpack.dev.js",
-    "build:prod": "set BROWSERSLIST_ENV=production&&set NODE_ENV=production&&webpack --config ./webpack.prod.js"
+    "build:dev": "set BROWSERSLIST_ENV=development&&set NODE_ENV=development&&webpack --config ./webpack.dev.js --mode development",
+    "build:prod": "set BROWSERSLIST_ENV=production&&set NODE_ENV=production&&webpack --config ./webpack.prod.js --mode production"
   },
   "repository": {
     "type": "git",
