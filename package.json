@@ -1,14 +1,9 @@
 {
   "name": "simpower-validation",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Modern, simple but powerful form validation library written in pure JavaScript, with no dependencies.",
   "main": "./simpower-validation.esm.js",
   "module": "./simpower-validation.esm.js",
-  "exports": {
-    ".": {
-      "import": "./simpower-validation.esm.js"
-    }
-  },
   "browserslist": {
     "development": [
       "last 2 versions"
