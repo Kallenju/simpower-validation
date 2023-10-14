@@ -260,7 +260,7 @@ class SimpowerValidation {
       }
     }
 
-    if (hasProperty(field.config, 'fieldValueHandler')) {
+    if (hasProperty(field.config, 'fieldValueHandler') && fieldValueHandler) {
       fieldValue = field.config.fieldValueHandler(fieldValue);
     }
 
