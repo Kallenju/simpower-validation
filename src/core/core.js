@@ -885,7 +885,7 @@ class SimpowerValidation {
           elem.classList.remove(...config.invalidViewOfField.classes);
         }
 
-        if (config.invalidViewOfField.on && config.validViewOfField.classes) {
+        if (config.validViewOfField.on && config.validViewOfField.classes) {
           elem.classList.add(...config.validViewOfField.classes);
         }
       } else {
@@ -893,7 +893,7 @@ class SimpowerValidation {
           elem.classList.remove(...config.validViewOfField.classes);
         }
 
-        if (config.validViewOfField.on && config.invalidViewOfField.classes) {
+        if (config.invalidViewOfField.on && config.invalidViewOfField.classes) {
           elem.classList.add(...config.invalidViewOfField.classes);
         }
       }
